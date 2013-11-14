@@ -1,5 +1,3 @@
-// var width = 10;
-// var height = 10;
 
 function Board(width, height) {
 
@@ -75,6 +73,26 @@ function Board(width, height) {
 		return clone;
 	}
 
+	this.toString = function() {
+		var result = "";
+		for (var row = 0; row < this.h; ++row) {
+			for (var col = 0; col < this.w; ++col) {
+				result += this.getCell(row, col) ? 'X' : '.';
+			}
+			result += "\n";
+		}
+	}
+
+	this.fromString = function(string) {
+		var stringRows = string.split(/\n/);
+		for (var row = 0; row < this.h; ++row) {
+			for (var col = 0; col < this.w; ++col) {
+				var value = (stringRows[row] && stringRows[row][col] == 'X') ? 1 : 0
+				this.setCell(row, col, value);
+			}
+		}
+	}
+
 	return this;
 }
 
@@ -129,10 +147,38 @@ function Game(width, height) {
 		this.updateUI();
 	}
 
+	this.clearBoard = function() {
+		for (var row = 0; row < this.board.h; ++row) {
+			for (var col = 0; col < this.board.w; ++col) {
+				this.board.setCell(row, col, 0);
+			}
+		}
+		this.updateUI();
+	}
+
+	this.loadGliderGun = function() {
+		var gliderGun =
+			"..........................................\n" +
+			"..........................................\n" +
+			"..........................................\n" +
+			"...........................X..............\n" +
+			".........................X.X..............\n" +
+			"...............XX......XX............XX...\n" +
+			"..............X...X....XX............XX...\n" +
+			"...XX........X.....X...XX.................\n" +
+			"...XX........X...X.XX....X.X..............\n" +
+			".............X.....X.......X..............\n" +
+			"..............X...X.......................\n" +
+			"...............XX.........................\n" +
+			"..........................................\n";
+		this.board.fromString(gliderGun);
+		this.updateUI();
+	}
+
 	return this;
 }
 
 var game;
 jQuery(document).ready(function() {
-	game = new Game(10, 10);
+	game = new Game(45, 30);
 });
