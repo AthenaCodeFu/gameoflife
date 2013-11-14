@@ -10,5 +10,9 @@ class DisplayTestCase(unittest.TestCase):
         generation = gameoflife.Generation([(0, 0)])
         self.assertEqual("X", generation.ascii_art())
 
+    def test_two_cells_with_space(self):
+        generation = gameoflife.Generation([(0, 0), (2, 0)])
+        self.assertEqual("X X", generation.ascii_art())
+
 if __name__ == '__main__':
     unittest.main()
