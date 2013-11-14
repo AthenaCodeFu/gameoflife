@@ -1,0 +1,17 @@
+#board {
+	cell-padding: 1px;
+}
+
+.on, .off {
+	width: 1em;
+	height: 1em;
+	border: 1px solid gray;
+}
+
+.off {
+	background-color: red;
+}
+
+.on {
+	background-color: blue;
+}
